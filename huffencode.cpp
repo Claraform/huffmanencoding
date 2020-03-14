@@ -34,12 +34,15 @@ int main(int argc, char *argv[])
  ss << ifs.rdbuf();
  data = ss.str();
  ifs.close();
- 
+
  // Create HuffmanTree
  STSCLA001::HuffmanTree tree;
  // Build Tree
  tree.buildTree(data);
  
+ // Encode Data
+ string encoded = tree.encode(data);
+
  // Write out compressed data to file
  
  return 0;

@@ -6,7 +6,7 @@ namespace STSCLA001
 using namespace std;
 
 // Get Root Node
-shared_ptr<HuffmanNode> HuffmanTree::getRoot(void) 
+shared_ptr<HuffmanNode> HuffmanTree::getRoot(void) const
 {
  return root;
 }
@@ -34,7 +34,6 @@ void HuffmanTree::buildTree(string data)
  // and Add to Queue
  for (auto node : helper)
  {
-  //shared_ptr<HuffmanNode> current(new HuffmanNode(node.first, node.second));
   pq.push(shared_ptr<HuffmanNode>(new HuffmanNode(node.first, node.second)));
  }
 
@@ -44,14 +43,62 @@ void HuffmanTree::buildTree(string data)
   // Remove 2 Nodes with Lowest Frequencies
   shared_ptr<HuffmanNode> l = pq.top(); pq.pop();
   shared_ptr<HuffmanNode> r = pq.top(); pq.pop();
-  HuffmanNode *parent = new HuffmanNode('\0', 0);
-  (*parent).setLeft(pq.top());
- }
-}
 
-// Compress Data
-void HuffmanTree::compress(void)
-{
+  // Compute Sum of Frequencies
+  int sum = l->getFreq() + r->getFreq();
+
+  // Create Internal with Previous Nodes
+  // as Children and Frequency Equal to
+  // Sum of Children
+  shared_ptr<HuffmanNode> parent;
+  parent->setFreq(sum);
+  parent->setLeft(l);
+  parent->setRight(r);
+  
+  // Add Parent Node Back to Queue
+  pq.push(parent);
+ }
+ // Queue will Now Have 1 Element Remaining
+ // Set this to Root Node
+ root = pq.top(); pq.pop();
+} 
+
+ // Encode Data
+ string HuffmanTree::encode(string data)
+ {
+  unordered_map<char, string> code;
+  HuffmanTree::codeTable(root, "", code);
+  // Print Code Table
+  cout << "Huffman Code: " << endl;
+  for (auto pair: code)
+  {
+   cout << pair.first << " = " << pair.second << endl;
+  }
+  // Create Encoded String
+  string encoded = "";
+  for (char c: data)
+  {
+   encoded += code[c];
+  }
+  return encoded;
+ }
+
+ // Build Code Table
+ void HuffmanTree::codeTable(shared_ptr<HuffmanNode> node, string s, unordered_map<char, string> & code)
+ { 
+  if (node == nullptr) return;
+  // Check for a Leaf Node
+  if (node->getLeft() == nullptr && node->getRight() == nullptr)
+  {
+   code[node->getLetter()] = s;
+  }
+  codeTable(node->getLeft(), s+"0", code);
+  codeTable(node->getRight(), s+"0", code);
+  }
+
+ // Compress Data
+ void HuffmanTree::compress(void)
+ {
 
 }
 

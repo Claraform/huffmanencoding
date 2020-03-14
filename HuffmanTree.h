@@ -2,6 +2,7 @@
 #define HUFFMANTREE_H
 
 #include "HuffmanNode.h"
+#include <iostream>
 #include <memory>
 #include <unordered_map>
 #include <queue>
@@ -49,6 +50,12 @@ public:
 
  // Build Tree
  void buildTree(string data);
+
+ // Encode Data
+ std::string encode(std::string data);
+
+ // Build Code Table
+ void codeTable(std::shared_ptr<HuffmanNode> node, std::string s, unordered_map<char, std::string> & code);
 
  // Compress Data
  void compress(void);
