@@ -43,7 +43,11 @@ int main(int argc, char *argv[])
  // Encode Data
  string encoded = tree.encode(data);
 
- // Write out compressed data to file
- 
+ // Write Out Encoded Data to File
+ ofstream ofs(outfile);
+ ofs << encoded;
+ ofs.close();
+
+ // Exit
  return 0;
 }

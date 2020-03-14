@@ -46,16 +46,16 @@ public:
  std::shared_ptr<HuffmanNode> getRoot(void) const; 
 
  // Create Unordered Map
- unordered_map<char, int> createMap(string data);
+ std::unordered_map<char, int> createMap(std::string data);
 
  // Build Tree
- void buildTree(string data);
+ void buildTree(std::string data);
 
  // Encode Data
  std::string encode(std::string data);
 
  // Build Code Table
- void codeTable(std::shared_ptr<HuffmanNode> node, std::string s, unordered_map<char, std::string> & code);
+ void codeTable(std::shared_ptr<HuffmanNode> node, std::string s, std::unordered_map<char, std::string> & code);
 
  // Compress Data
  void compress(void);
@@ -63,7 +63,7 @@ public:
 // Comparison Structure Used to Order the Queue
 struct compare
 {
- bool operator()(const shared_ptr<HuffmanNode> & lhs, const shared_ptr<HuffmanNode> & rhs) const;
+ bool operator()(const std::shared_ptr<HuffmanNode> & lhs, const std::shared_ptr<HuffmanNode> & rhs) const;
 };
 } // namespace STSCLA001
 #endif

@@ -12,7 +12,7 @@ shared_ptr<HuffmanNode> HuffmanTree::getRoot(void) const
 }
 
 // Create Unordered Map
-unordered_map<char, int> createMap(string data)
+unordered_map<char, int> HuffmanTree::createMap(string data)
 {
  unordered_map<char, int> helper;
  for (char c: data)
@@ -67,7 +67,7 @@ void HuffmanTree::buildTree(string data)
  string HuffmanTree::encode(string data)
  {
   unordered_map<char, string> code;
-  HuffmanTree::codeTable(root, "", code);
+  codeTable(root, "", code);
   // Print Code Table
   cout << "Huffman Code: " << endl;
   for (auto pair: code)
