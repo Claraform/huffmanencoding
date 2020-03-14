@@ -30,10 +30,10 @@ public:
  std::shared_ptr<HuffmanNode> getRoot(void);
 
  // Build Tree
- void buildTree(void){};
+ void buildTree(void);
 
  // Compress Data
- void compress(void){};
+ void compress(void);
 };
 } // namespace STSCLA001
 #endif

@@ -14,11 +14,11 @@ private:
  std::shared_ptr<HuffmanNode> right = nullptr;
 
 public:
- //Constructors and Destructors
+ // Constructors and Destructors
  HuffmanNode(char l, int f);
  ~HuffmanNode();
 
- //Getters and setters
+ // Getters and setters
  char getLetter(void);
  int getFreq(void);
  void setFreq(int f);
@@ -29,8 +29,8 @@ public:
  void setRight(std::shared_ptr<HuffmanNode> r);
  std::shared_ptr<HuffmanNode> getRight(void);
 
- //Overload the comparison operator
- bool operator<(const HuffmanNode &b);
+ // Overload the comparison operator
+ bool operator<(const HuffmanNode &lhs);
 };
 
 } // namespace STSCLA001
