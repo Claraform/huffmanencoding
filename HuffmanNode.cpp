@@ -42,14 +42,16 @@ shared_ptr<HuffmanNode> HuffmanNode::getRight(void) const
 }
 
 // Overload the comparison operator
-bool HuffmanNode::operator<(const HuffmanNode &lhs) const
+bool HuffmanNode::operator>(const HuffmanNode &rhs) const
 {
- if (this->frequency < lhs.frequency)
+ if (this->frequency > rhs.frequency)
  {
   return true;
  }
  else
+ {
   return false;
+ }
 }
 
 } // namespace STSCLA001

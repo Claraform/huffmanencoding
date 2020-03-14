@@ -1,6 +1,7 @@
 #ifndef HUFFMANNODE_H
 #define HUFFMANNODE_H
 #include <memory>
+#include <iostream>
 
 namespace STSCLA001
 {
@@ -31,7 +32,7 @@ public:
  std::shared_ptr<HuffmanNode> getRight(void) const;
 
  // Overload the comparison operator
- bool operator<(const HuffmanNode &lhs) const;
+ bool operator>(const HuffmanNode &rhs) const;
 };
 
 } // namespace STSCLA001

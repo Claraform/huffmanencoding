@@ -3,6 +3,7 @@
 
 #include "HuffmanNode.h"
 #include <iostream>
+#include <fstream>
 #include <memory>
 #include <unordered_map>
 #include <queue>
@@ -14,6 +15,8 @@ class HuffmanTree
 {
 private:
  std::shared_ptr<HuffmanNode> root = nullptr;
+ int fieldcount = 0;
+ std::string data = "";
 
 public:
  // Default constructor
@@ -21,38 +24,47 @@ public:
  // Destructor
  ~HuffmanTree(){ root = nullptr; };
  // Copy Constructor
- HuffmanTree(const HuffmanTree & rhs): root(rhs.root){};
+ HuffmanTree(const HuffmanTree & rhs): root(rhs.root), data(rhs.data), fieldcount(rhs.fieldcount){};
  // Copy Assignment Operator
  HuffmanTree & operator=(const HuffmanTree &rhs)
  {
   if (this != &rhs)
   {
    root = rhs.root;
+   data = rhs.data;
+   fieldcount = rhs.fieldcount;
   }
   return *this;
  };
  // Move Constructor
- HuffmanTree(HuffmanTree && rhs): root(std::move(rhs.root)){};
+ HuffmanTree(HuffmanTree && rhs): root(std::move(rhs.root)), data(std::move(rhs.data))
+ {
+  fieldcount = rhs.fieldcount;
+  rhs.fieldcount = 0;
+ };
  // Move Assignment Operator
  HuffmanTree & operator=(HuffmanTree && rhs)
  {
   if (this != &rhs)
   {
    root = std::move(rhs.root);
+   data = std::move(rhs.data);
+   fieldcount = rhs.fieldcount;
+   rhs.fieldcount = 0;
   }
  };
 
  // Get Root Node
  std::shared_ptr<HuffmanNode> getRoot(void) const; 
 
- // Create Unordered Map
- std::unordered_map<char, int> createMap(std::string data);
+ // Create Unordered Frequency Map
+ std::unordered_map<char, int> createMap();
 
  // Build Tree
- void buildTree(std::string data);
+ void buildTree(std::string infile);
 
  // Encode Data
- std::string encode(std::string data);
+ void encode(std::string outfile);
 
  // Build Code Table
  void codeTable(std::shared_ptr<HuffmanNode> node, std::string s, std::unordered_map<char, std::string> & code);

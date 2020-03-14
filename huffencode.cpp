@@ -15,38 +15,18 @@ int main(int argc, char *argv[])
   cout << "Exiting..." << endl;
   return 0;
  }
-
+ 
  // Capture arguments
  string infile(argv[1]);
  string outfile(argv[2]);
 
- // Read Input File and Store in String
- ifstream ifs(infile);
- if (!ifs)
- {
-  cout << "Error opening " << infile << " ASCII file." << endl;
-  cout << "Does the file exist in the working directory?" << endl;
-  return 0;
- }
- string data;
- string temp;
- stringstream ss;
- ss << ifs.rdbuf();
- data = ss.str();
- ifs.close();
-
  // Create HuffmanTree
  STSCLA001::HuffmanTree tree;
  // Build Tree
- tree.buildTree(data);
- 
- // Encode Data
- string encoded = tree.encode(data);
+ tree.buildTree(infile);
 
- // Write Out Encoded Data to File
- ofstream ofs(outfile);
- ofs << encoded;
- ofs.close();
+ // Encode Data
+ tree.encode(outfile);
 
  // Exit
  return 0;
