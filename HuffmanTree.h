@@ -4,6 +4,7 @@
 #include "HuffmanNode.h"
 #include <memory>
 #include <unordered_map>
+#include <queue>
 
 namespace STSCLA001
 {
@@ -41,7 +42,7 @@ public:
  };
 
  // Get Root Node
- std::shared_ptr<HuffmanNode> getRoot(void);
+ std::shared_ptr<HuffmanNode> getRoot(void) const; 
 
  // Create Unordered Map
  unordered_map<char, int> createMap(string data);
@@ -51,6 +52,11 @@ public:
 
  // Compress Data
  void compress(void);
+};
+// Comparison Structure Used to Order the Queue
+struct compare
+{
+ bool operator()(const shared_ptr<HuffmanNode> & lhs, const shared_ptr<HuffmanNode> & rhs) const;
 };
 } // namespace STSCLA001
 #endif

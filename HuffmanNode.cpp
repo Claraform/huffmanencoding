@@ -5,12 +5,12 @@ namespace STSCLA001
 using namespace std;
 
 // Get Node Letter
-char HuffmanNode::getLetter(void)
+char HuffmanNode::getLetter(void) const
 {
  return letter;
 }
 // Get Letter Frequency
-int HuffmanNode::getFreq(void)
+int HuffmanNode::getFreq(void) const
 {
  return frequency;
 }
@@ -26,7 +26,7 @@ void HuffmanNode::setLeft(shared_ptr<HuffmanNode> l)
  left = l;
 }
 // Get Left Link
-shared_ptr<HuffmanNode> HuffmanNode::getLeft(void)
+shared_ptr<HuffmanNode> HuffmanNode::getLeft(void) const
 {
  return left;
 }
@@ -36,13 +36,13 @@ void HuffmanNode::setRight(shared_ptr<HuffmanNode> r)
  right = r;
 }
 // Get Right Link
-shared_ptr<HuffmanNode> HuffmanNode::getRight(void)
+shared_ptr<HuffmanNode> HuffmanNode::getRight(void) const
 {
  return right;
 }
 
 // Overload the comparison operator
-bool HuffmanNode::operator<(const HuffmanNode &lhs)
+bool HuffmanNode::operator<(const HuffmanNode &lhs) const
 {
  if (this->frequency < lhs.frequency)
  {
