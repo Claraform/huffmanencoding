@@ -15,8 +15,8 @@ private:
 
 public:
  // Constructors and Destructors
- HuffmanNode(char l, int f);
- ~HuffmanNode();
+ HuffmanNode(char l, int f): letter(l), frequency(f){};
+ ~HuffmanNode() = default; 
 
  // Getters and setters
  char getLetter(void);

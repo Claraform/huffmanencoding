@@ -4,19 +4,6 @@ namespace STSCLA001
 {
 using namespace std;
 
-// Constructor
-HuffmanNode::HuffmanNode(char l, int f)
-{
- letter = l;
- frequency = f;
-}
-
-// Destructor
-HuffmanNode::~HuffmanNode()
-{
- // No delete necessary as managed pointers used
-}
-
 // Get Node Letter
 char HuffmanNode::getLetter(void)
 {

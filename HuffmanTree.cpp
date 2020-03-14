@@ -1,23 +1,31 @@
 #include "HuffmanTree.h"
 
-namespace STSCLA001{
+namespace STSCLA001
+{
 
 using namespace std;
 
-std::shared_ptr<HuffmanNode> root = nullptr;
-
-// Default constructor
-HuffmanTree::HuffmanTree(){}
-
-// Destructor
-HuffmanTree::~HuffmanTree(){}
-
 // Get Root Node
-shared_ptr<HuffmanNode> HuffmanTree::getRoot(void){}
+shared_ptr<HuffmanNode> HuffmanTree::getRoot(void) 
+{
+ return root;
+}
+
+// Create Unordered Map
+unordered_map<char, int> createMap(string data)
+{
+
+}
 
 // Build Tree
-void HuffmanTree::buildTree(void){};
+void HuffmanTree::buildTree(string data)
+{
+
+}
 
 // Compress Data
-void HuffmanTree::compress(void){};
+void HuffmanTree::compress(void)
+{
+
 }
+} // namespace STSCLA001
