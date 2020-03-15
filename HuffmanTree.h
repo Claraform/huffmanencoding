@@ -7,6 +7,7 @@
 #include <memory>
 #include <unordered_map>
 #include <queue>
+#include <bitset>
 
 namespace STSCLA001
 {
@@ -15,10 +16,13 @@ class HuffmanTree
 {
 private:
  std::shared_ptr<HuffmanNode> root = nullptr;
+ std::unordered_map<char, int> tree;
  int fieldcount = 0;
  std::string data = "";
 
 public:
+ // Code Table
+ std::unordered_map<char, std::string> code;
  // Default constructor
  HuffmanTree() = default;
  // Destructor
@@ -54,11 +58,13 @@ public:
   }
  };
 
+ // Get Map
+ std::unordered_map<char, int> getMap(void) const;
  // Get Root Node
  std::shared_ptr<HuffmanNode> getRoot(void) const; 
 
  // Create Unordered Frequency Map
- std::unordered_map<char, int> createMap();
+ void createMap();
 
  // Build Tree
  void buildTree(std::string infile);
@@ -67,10 +73,10 @@ public:
  void encode(std::string outfile);
 
  // Build Code Table
- void codeTable(std::shared_ptr<HuffmanNode> node, std::string s, std::unordered_map<char, std::string> & code);
+ void codeTable(std::shared_ptr<HuffmanNode> node, std::string s);
 
  // Compress Data
- void compress(void);
+ void compress(std::string byte, std::string outfile);
 };
 // Comparison Structure Used to Order the Queue
 struct compare

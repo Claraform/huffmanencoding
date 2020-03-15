@@ -13,6 +13,12 @@ HuffmanTree.o: HuffmanTree.cpp HuffmanTree.h
 HuffmanNode.o: HuffmanNode.cpp HuffmanNode.h
 	$(CC) $(CCFLAGS) HuffmanNode.cpp -c
 
+Test.o:	Test.cpp
+	$(CC) $(CCFLAGS) Test.cpp -c
+
+test: HuffmanNode.o HuffmanTree.o Test.o
+	$(CC) $(CCFLAGS) HuffmanNode.o HuffmanTree.o Test.o -o test 
+
 clean:
 	rm -f *.o
 	rm -f huffencode

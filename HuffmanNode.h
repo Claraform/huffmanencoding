@@ -19,6 +19,45 @@ public:
  HuffmanNode()=default;
  HuffmanNode(char l, int f): letter(l), frequency(f){};
  ~HuffmanNode() = default; 
+ // Copy Constructor
+ HuffmanNode(const HuffmanNode & rhs): left(rhs.left), right(rhs.right), letter(rhs.letter), frequency(rhs.frequency){};
+ // Copy Assignment Operator
+ HuffmanNode & operator=(const HuffmanNode &rhs)
+ {
+  if (this != &rhs)
+  {
+   left = rhs.left;
+   right = rhs.right;
+   letter = rhs.letter;
+   frequency = rhs.frequency;
+  }
+  return *this;
+ };
+ // Move Constructor
+ HuffmanNode(HuffmanNode && rhs): left(std::move(rhs.left)), right(std::move(rhs.right))
+ {
+  rhs.left = nullptr;
+  rhs.right = nullptr;
+  letter = rhs.letter;
+  rhs.letter = '\0';
+  frequency = rhs.frequency;
+  rhs.frequency = 0;
+ };
+ // Move Assignment Operator
+ HuffmanNode &operator=(HuffmanNode &&rhs)
+ {
+  if (this != &rhs)
+  {
+   left = std::move(rhs.left);
+   right = std::move(rhs.right);
+   rhs.left = nullptr;
+   rhs.right = nullptr;
+   letter = rhs.letter;
+   rhs.letter = '\0';
+   frequency = rhs.frequency;
+   rhs.frequency = 0;
+  }
+ };
 
  // Getters and setters
  char getLetter(void) const;

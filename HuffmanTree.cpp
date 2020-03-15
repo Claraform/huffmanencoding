@@ -5,6 +5,12 @@ namespace STSCLA001
 
 using namespace std;
 
+// Get Map
+ std::unordered_map<char, int> HuffmanTree::getMap(void) const
+ {
+  return tree;
+ }
+
 // Get Root Node
 shared_ptr<HuffmanNode> HuffmanTree::getRoot(void) const
 {
@@ -12,15 +18,13 @@ shared_ptr<HuffmanNode> HuffmanTree::getRoot(void) const
 }
 
 // Create Unordered Frequency Map
-unordered_map<char, int> HuffmanTree::createMap()
+void HuffmanTree::createMap()
 {
- unordered_map<char, int> helper;
  for (char c: data)
  {
-  helper[c]++;
+  tree[c]++;
  }
- fieldcount = helper.size();
- return helper;
+ fieldcount = tree.size();
 }
 
 // Build Tree
@@ -45,14 +49,14 @@ void HuffmanTree::buildTree(string infile)
  ifs.close();
 
  // Create Frequency Map 
- unordered_map<char, int> helper = createMap();
+ createMap();
 
  // Create Priority Queue to Assist Tree Building
  priority_queue<shared_ptr<HuffmanNode>, vector<shared_ptr<HuffmanNode>>, compare> pq;
 
  // Create a Leaf Node for Each Letter in The Map
  // and Add to Queue
- for (auto node : helper)
+ for (auto node : tree)
  {
   pq.push(shared_ptr<HuffmanNode>(new HuffmanNode(node.first, node.second)));
  }
@@ -90,8 +94,8 @@ void HuffmanTree::buildTree(string infile)
  // Encode Data
  void HuffmanTree::encode(string outfile)
  {
-  unordered_map<char, string> code;
-  codeTable(root, "", code);
+  
+  codeTable(root, "");
 
   // Save Code Table to File
   ofstream ofs(outfile + ".hdr");
@@ -106,7 +110,9 @@ void HuffmanTree::buildTree(string infile)
   string encoded = "";
   for (char c: data)
   {
-   encoded += code[c];
+   string temp = code[c];
+   compress(temp, outfile);
+   encoded += temp;
   }
   // Write Encoded String to File
   ofstream of(outfile + ".out");
@@ -115,7 +121,7 @@ void HuffmanTree::buildTree(string infile)
  }
 
  // Build Code Table
- void HuffmanTree::codeTable(shared_ptr<HuffmanNode> node, string s, unordered_map<char, string> & code)
+ void HuffmanTree::codeTable(shared_ptr<HuffmanNode> node, string s)
  { 
   if (node == nullptr) 
   {
@@ -127,19 +133,28 @@ void HuffmanTree::buildTree(string infile)
    code[node->getLetter()] = s;
    s = "";
   }
-  codeTable(node->getLeft(), s+"0", code);
-  codeTable(node->getRight(), s+"1", code);
+  codeTable(node->getLeft(), s+"0");
+  codeTable(node->getRight(), s+"1");
   }
 
  // Compress Data
- void HuffmanTree::compress(void)
+ void HuffmanTree::compress(string byte, string outfile)
  {
-  int a;
+  bitset<1> b(byte);
+  unsigned long n = b.to_ulong();
+  unsigned char c = static_cast<unsigned char>(n);
+  streampos size;
+  ofstream ofs(outfile + ".bin", ios::app|ios::out|ios::binary);
+  if (ofs.is_open())
+  {
+   ofs.write(reinterpret_cast<char*>(&n), 8);
+  }
+
  }
 
-// Comparison Structure Used to Order the Queue
-bool compare::operator()(const shared_ptr<HuffmanNode> & lhs, const shared_ptr<HuffmanNode> & rhs) const
-{
- return (*lhs)>(*rhs);
+ // Comparison Structure Used to Order the Queue
+ bool compare::operator()(const shared_ptr<HuffmanNode> &lhs, const shared_ptr<HuffmanNode> &rhs) const
+ {
+  return (*lhs) > (*rhs);
 }
 } // namespace STSCLA001
