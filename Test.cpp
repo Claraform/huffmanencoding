@@ -72,9 +72,21 @@ namespace STSCLA001
   {
    HuffmanTree h;
    h.buildTree("testing.txt");
-   REQUIRE(h.codeTable.at('a') == "00");
-   REQUIRE(h.codeTable.at('b') == "01");
-   REQUIRE(h.codeTable.at('c') == "1");
+   for (auto letter: h.code)
+   {
+    if(letter.first == 'a')
+    {
+     REQUIRE(letter.second == "00");
+    }
+    if(letter.first == 'b')
+    {
+     REQUIRE(letter.second == "01");
+    }
+    if(letter.first == 'c')
+    {
+     REQUIRE(letter.second == "1");
+    }
+   }
   }
   SECTION("File Output Test")
   {
